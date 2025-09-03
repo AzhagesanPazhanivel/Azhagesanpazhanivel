@@ -140,6 +140,45 @@
         .skill-list li:last-child {
             border-bottom: none;
         }
+
+        /* Projects Section Styles */
+        .projects-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .project-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-item h3 {
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .project-plans {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.7rem;
+            margin-bottom: 1rem;
+        }
+
+        .plan-pill {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
         
         .timeline {
             position: relative;
@@ -250,6 +289,10 @@
                 align-items: center;
                 gap: 0.5rem;
             }
+
+            .projects-container {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -328,6 +371,34 @@
         </div>
     </section>
 
+    <!-- Projects Section -->
+    <section id="projects">
+        <div class="container">
+            <h2>Key Projects & Health Plans</h2>
+            <div class="projects-container">
+                <div class="project-item">
+                    <h3><i class="fas fa-heartbeat"></i> Medicare Advantage (MA) & Affordable Care Act (ACA)</h3>
+                    <div class="project-plans">
+                        <span class="plan-pill">Aetna MRA/ACA</span>
+                        <span class="plan-pill">Elevance ACA/MA</span>
+                        <span class="plan-pill">Centene ACA/MA</span>
+                        <span class="plan-pill">Oscar</span>
+                        <span class="plan-pill">Clover</span>
+                        <span class="plan-pill">Molina</span>
+                    </div>
+                    <p>Managed HCC coding and quality assurance for multiple major payers, ensuring accurate risk adjustment and strict compliance with both MA and ACA guidelines.</p>
+                </div>
+                <div class="project-item">
+                    <h3><i class="fas fa-clipboard-check"></i> Commercial & Government Programs</h3>
+                    <div class="project-plans">
+                        <span class="plan-pill">B&T</span>
+                    </div>
+                    <p>Delivered high-quality coding and auditing services for commercial and other government health programs, maintaining a consistent accuracy rate above 95%.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Experience Section -->
     <section id="experience">
         <div class="container">
@@ -386,6 +457,7 @@
         // Simple animation for timeline items
         document.addEventListener('DOMContentLoaded', function() {
             const timelineItems = document.querySelectorAll('.timeline-content');
+            const projectItems = document.querySelectorAll('.project-item');
             
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -397,6 +469,13 @@
             }, { threshold: 0.1 });
             
             timelineItems.forEach(item => {
+                item.style.opacity = 0;
+                item.style.transform = 'translateY(20px)';
+                item.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                observer.observe(item);
+            });
+
+            projectItems.forEach(item => {
                 item.style.opacity = 0;
                 item.style.transform = 'translateY(20px)';
                 item.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
