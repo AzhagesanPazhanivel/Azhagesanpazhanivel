@@ -121,6 +121,7 @@
             color: white;
             font-size: 2rem;
             animation: bounce 2s infinite;
+            cursor: pointer;
         }
         
         @keyframes bounce {
@@ -184,6 +185,13 @@
             border-radius: 10px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .skill-category.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
         
         .skill-category:hover {
@@ -235,6 +243,13 @@
             border-radius: 10px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .project-item.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .project-item:hover {
@@ -370,6 +385,14 @@
             padding: 2.5rem;
             border-radius: 10px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+        
+        .education-content.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
         
         .education-content h3 {
@@ -613,6 +636,7 @@
             const timelineItems = document.querySelectorAll('.timeline-item');
             const projectItems = document.querySelectorAll('.project-item');
             const skillCategories = document.querySelectorAll('.skill-category');
+            const educationContent = document.querySelector('.education-content');
             
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -622,23 +646,25 @@
                 });
             }, { threshold: 0.1 });
             
+            // Observe timeline items
             timelineItems.forEach(item => {
                 observer.observe(item);
             });
 
+            // Observe project items
             projectItems.forEach(item => {
-                item.style.opacity = 0;
-                item.style.transform = 'translateY(30px)';
-                item.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
                 observer.observe(item);
             });
 
+            // Observe skill categories
             skillCategories.forEach(item => {
-                item.style.opacity = 0;
-                item.style.transform = 'translateY(30px)';
-                item.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
                 observer.observe(item);
             });
+
+            // Observe education content
+            if (educationContent) {
+                observer.observe(educationContent);
+            }
 
             // Scroll to section when arrow is clicked
             document.querySelector('.scroll-down').addEventListener('click', function() {
